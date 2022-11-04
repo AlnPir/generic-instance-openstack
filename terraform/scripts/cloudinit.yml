@@ -1,0 +1,18 @@
+#cloud-config
+
+### Sec###
+debug: False
+disable_root: True
+ssh_pwauth: False
+ssh_deletekeys: True
+
+### User###
+users:
+  - name: alpine
+    shell: /bin/bash
+    groups: users
+    ssh_import_id: None
+    lock_passwd: true
+    sudo: ALL=(ALL) NOPASSWD:ALL
+    ssh_authorized_keys:
+      - ${sshkey}
