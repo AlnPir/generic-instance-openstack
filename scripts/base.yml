@@ -1,12 +1,10 @@
-#cloud-config
-
-### Sec###
+### Sec ###
 debug: False
 disable_root: True
 ssh_pwauth: False
 ssh_deletekeys: True
 
-### User###
+### User ###
 users:
   - name: alpine
     shell: /bin/bash
@@ -16,3 +14,9 @@ users:
     sudo: ALL=(ALL) NOPASSWD:ALL
     ssh_authorized_keys:
       - ${sshkey}
+
+### Package ###
+package_update: true
+package_upgrade: true
+packages:
+  - podman

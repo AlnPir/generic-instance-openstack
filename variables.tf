@@ -1,28 +1,28 @@
 ### Provider ###
 variable "auth_url" {
-  type        = string
+  type = string
 }
 variable "region" {
-  type        = string
+  type = string
 }
 variable "user_name" {
-  type        = string
+  type = string
 }
 variable "password" {
-  type        = string
+  type = string
 }
 variable "user_domain_name" {
-  type        = string
+  type = string
 }
 variable "project_domain_id" {
-  type        = string
+  type = string
 }
 variable "tenant_id" {
-  type        = string
+  type = string
 }
 variable "tenant_name" {
-  type        = string
+  type = string
 }
 variable "sshkey" {
-  type        = string
+  type = string
 }

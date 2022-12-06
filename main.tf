@@ -1,4 +1,3 @@
-# Define required providers
 terraform {
   required_providers {
     openstack = {
@@ -8,7 +7,6 @@ terraform {
   }
 }
 
-# Configure the OpenStack Provider
 provider "openstack" {
   auth_url          = var.auth_url
   region            = var.region
@@ -20,7 +18,6 @@ provider "openstack" {
   tenant_name       = var.tenant_name
 }
 
-# Create a web security group
 resource "openstack_compute_secgroup_v2" "sg-web-front" {
   name        = "sg-web-front"
   description = "Security group for web front instances"
@@ -49,21 +46,20 @@ resource "openstack_compute_secgroup_v2" "sg-web-front" {
 
 data "cloudinit_config" "base_config" {
   part {
-    filename     = "cloudinit.yml"
+    filename     = "base.yml"
     content_type = "text/cloud-config"
-    content      = templatefile("scripts/cloudinit.yml", {
+    content = templatefile("scripts/base.yml", {
       sshkey = var.sshkey
     })
   }
 }
 
-# Create an instance
 resource "openstack_compute_instance_v2" "instance" {
   name            = "instance"
   image_id        = "8db8bf5c-9962-41f9-a16c-a5d7b8e6055e" #opensuse
   flavor_name     = "a1-ram2-disk20-perf1"
   security_groups = ["sg-web-front"]
-  user_data = data.cloudinit_config.base_config.rendered
+  user_data       = data.cloudinit_config.base_config.rendered
   metadata = {
     application = "instance"
   }
